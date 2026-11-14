@@ -1,0 +1,150 @@
+{
+ "store": {
+  "slug": "506724",
+  "title": "O’rikzor Bozori Telefon Aksesuarlari 54-Do’kon Dilshod akadan",
+  "about": null,
+  "logo": "https://qarzapp.uz/storage/online_store_logos/1792076435_6ad0ea93d4295.jpg",
+  "logo_thumb": "/storage/thumbs/480/online_store_logos/1792076435_6ad0ea93d4295.jpg.webp",
+  "palette": {
+   "key": "red",
+   "from": "#ef4444",
+   "to": "#b91c1c",
+   "primary": "#dc2626",
+   "on_primary": "#ffffff",
+   "soft": "#fef2f2",
+   "dark_primary": "#dc2626"
+  },
+  "phone": "+998881113044",
+  "telegram": null,
+  "address": "Bozor",
+  "work_time": null,
+  "hours": null,
+  "currency": "UZS",
+  "is_open": true,
+  "closed_reason": null,
+  "delivery_enabled": true,
+  "delivery_price": 0,
+  "free_delivery_from": null,
+  "pickup_enabled": true,
+  "min_order_amount": 0,
+  "delivery_zones": [],
+  "delivery_terms": null,
+  "payment_methods": [
+   {
+    "type": "cash",
+    "title": "Naqd pul",
+    "hint": "Qabul qilganda naqd to‘laysiz",
+    "proof": false,
+    "card_number": null,
+    "card_holder": null,
+    "bank": null,
+    "details": null,
+    "link": null,
+    "note": null
+   },
+   {
+    "type": "card_on_delivery",
+    "title": "Karta bilan joyida",
+    "hint": "Qabul qilganda karta bilan to‘laysiz",
+    "proof": false,
+    "card_number": null,
+    "card_holder": null,
+    "bank": null,
+    "details": null,
+    "link": null,
+    "note": null
+   }
+  ],
+  "welcome_text": "Assalomu alaykum \nBemalol buyurtma qiling \nTushunmaganingzini so’rayvering",
+  "order_note": "Tezda javob qaytaramiz",
+  "bot_username": "next_mobile_toshkent_bot"
+ },
+ "categories": [
+  {
+   "id": 23,
+   "name": "Adapter"
+  },
+  {
+   "id": 24,
+   "name": "Avto zaryadka"
+  },
+  {
+   "id": 25,
+   "name": "Aux"
+  },
+  {
+   "id": 26,
+   "name": "Batare"
+  },
+  {
+   "id": 27,
+   "name": "Holder"
+  },
+  {
+   "id": 28,
+   "name": "Mishka"
+  },
+  {
+   "id": 29,
+   "name": "Perexadnik"
+  },
+  {
+   "id": 30,
+   "name": "Usb Kabel"
+  },
+  {
+   "id": 31,
+   "name": "Zaryadka"
+  },
+  {
+   "id": 32,
+   "name": "Airpods"
+  },
+  {
+   "id": 33,
+   "name": "Boshqa"
+  },
+  {
+   "id": 34,
+   "name": "Katta Quloqchinlar Bulutuzli"
+  },
+  {
+   "id": 35,
+   "name": "Cooler"
+  },
+  {
+   "id": 37,
+   "name": "Klavatura"
+  },
+  {
+   "id": 38,
+   "name": "Naushnik"
+  },
+  {
+   "id": 39,
+   "name": "Powerbank"
+  },
+  {
+   "id": 40,
+   "name": "Watch"
+  },
+  {
+   "id": 41,
+   "name": "Wi fi"
+  },
+  {
+   "id": 42,
+   "name": "Mikrafon"
+  },
+  {
+   "id": 0,
+   "name": "Boshqalar"
+  }
+ ],
+ "banners": [],
+ "facets": {
+  "total": 704,
+  "discounts": 0,
+  "out_of_stock": 0
+ }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+!.env.example
+cache/
+uploads/
+media/everest/u_*
+*.log
+*.tmp

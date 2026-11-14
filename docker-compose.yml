@@ -1,0 +1,11 @@
+# Everest Case — BACKEND (NestJS + Prisma + Telegram bot).
+# Serverdagi MAVJUD postgres (127.0.0.1:5432) va cos-minio (127.0.0.1:9010)
+# ga host-tarmoq orqali ulanadi. Yangi postgres/minio KO'TARMAYDI.
+services:
+  backend:
+    build: .
+    image: everest-backend:latest
+    container_name: everest-backend
+    restart: unless-stopped
+    network_mode: host # 127.0.0.1:5432 (pg) + 127.0.0.1:9010 (minio)
+    env_file: .env

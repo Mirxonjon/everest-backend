@@ -1,0 +1,155 @@
+// Sotuv Market — ma'lumotlar modeli (PostgreSQL + Prisma).
+// Jadval va ustun nomlari snake_case (@map) — baza SQL konvensiyasida,
+// Prisma Client esa camelCase bilan ishlaydi.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Do'kon. Bitta instansda bir nechta bo'lishi mumkin (slug bo'yicha).
+model Store {
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  title           String
+  logo            String?
+  logoThumb       String?  @map("logo_thumb")
+  phone           String?
+  telegram        String?
+  instagram       String?
+  address         String?
+  currency        String   @default("UZS")
+  isOpen          Boolean  @default(true) @map("is_open")
+  deliveryEnabled Boolean  @default(true) @map("delivery_enabled")
+  deliveryPrice   Int      @default(0) @map("delivery_price")
+  pickupEnabled   Boolean  @default(true) @map("pickup_enabled")
+  minOrderAmount  Int      @default(0) @map("min_order_amount")
+  welcomeText     String?  @map("welcome_text")
+  /// Rang sxemasi {primary, from, to, ...} — vitrina temasiga quyiladi.
+  palette         Json
+  /// To'lov usullari ro'yxati [{type,title,hint,...}].
+  paymentMethods  Json     @map("payment_methods")
+  /// Buyurtmalar tushadigan Telegram chat (har do'konning o'ziniki).
+  telegramChatId  String?  @map("telegram_chat_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  categories Category[]
+  products   Product[]
+  orders     Order[]
+
+  @@map("stores")
+}
+
+/// Katalog bo'limi. `id` manbadagi raqamni saqlaydi (0 = «Boshqalar»).
+model Category {
+  id      Int    @id
+  storeId Int    @map("store_id")
+  name    String
+  sort    Int    @default(0)
+
+  store    Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  products Product[]
+
+  @@index([storeId])
+  @@map("categories")
+}
+
+/// Mahsulot. Rasmlar massiv sifatida (asl qarzapp.uz URL/thumb/image yo'llari).
+model Product {
+  id          Int      @id
+  storeId     Int      @map("store_id")
+  categoryId  Int?     @map("category_id")
+  name        String
+  description String?
+  price       Int
+  currency    String   @default("UZS")
+  oldPrice    Int?     @map("old_price")
+  discount    Int?
+  unit        String?
+  minQty      Int?     @map("min_qty")
+  inStock     Boolean  @default(true) @map("in_stock")
+  stock       Int?
+  photos      String[]
+  thumbs      String[]
+  images      String[]
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  store      Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  orderItems OrderItem[]
+
+  @@index([storeId, categoryId])
+  @@index([storeId, inStock])
+  @@map("products")
+}
+
+enum OrderStatus {
+  NEW
+  ACCEPTED
+  DELIVERING
+  DONE
+  CANCELED
+
+  @@map("order_status")
+}
+
+enum DeliveryType {
+  DELIVERY
+  PICKUP
+
+  @@map("delivery_type")
+}
+
+/// Buyurtma. token — akkauntsiz tarix kaliti, localId — idempotentlik kaliti.
+model Order {
+  id            Int          @id @default(autoincrement())
+  storeId       Int          @map("store_id")
+  number        String
+  token         String       @unique
+  localId       String?      @unique @map("local_id")
+  status        OrderStatus  @default(NEW)
+  customerName  String       @map("customer_name")
+  phone         String
+  address       String?
+  comment       String?
+  deliveryType  DeliveryType @default(DELIVERY) @map("delivery_type")
+  itemsTotal    Int          @map("items_total")
+  deliveryPrice Int          @default(0) @map("delivery_price")
+  total         Int
+  paymentType   String?      @map("payment_type")
+  paymentTitle  String?      @map("payment_title")
+  paymentStatus String       @default("unpaid") @map("payment_status")
+  cancelReason  String?      @map("cancel_reason")
+  createdAt     DateTime     @default(now()) @map("created_at")
+
+  store Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  items OrderItem[]
+
+  @@index([storeId])
+  @@map("orders")
+}
+
+/// Buyurtma qatori. Mahsulot nomi/narxi/rasmi nusxada — tovar keyin
+/// o'zgarsa ham, buyurtma qanday berilgan bo'lsa shundayligicha qoladi.
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int     @map("order_id")
+  productId Int?    @map("product_id")
+  name      String
+  quantity  Int
+  price     Int
+  currency  String
+  unit      String?
+  photo     String?
+  photoFull String? @map("photo_full")
+
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@map("order_items")
+}

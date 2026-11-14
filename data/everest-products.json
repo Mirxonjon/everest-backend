@@ -1,0 +1,392 @@
+[
+ {
+  "name": "RECRSI RE-Z054 Magnit tutqich",
+  "price": 55000,
+  "category": "Tutqich",
+  "image": "/media/everest/0.jpg"
+ },
+ {
+  "name": "RECRSI RE-Z042 Stol tutqichi",
+  "price": 20000,
+  "category": "Tutqich",
+  "image": "/media/everest/1.jpg"
+ },
+ {
+  "name": "RECRSI RE-Z006 Avto tutqich",
+  "price": 28000,
+  "category": "Tutqich",
+  "image": "/media/everest/2.jpg"
+ },
+ {
+  "name": "Parkovka raqami (Fouring)",
+  "price": 8000,
+  "category": "Boshqa",
+  "image": "/media/everest/3.jpg"
+ },
+ {
+  "name": "Parkovka raqami T1",
+  "price": 12000,
+  "category": "Boshqa",
+  "image": "/media/everest/4.jpg"
+ },
+ {
+  "name": "RECRSI Avto zaryadka (2 USB)",
+  "price": 10000,
+  "category": "Avto zaryadka",
+  "image": "/media/everest/5.jpg"
+ },
+ {
+  "name": "RECRSI CAR-E31 Avto zaryadka 30W",
+  "price": 22000,
+  "category": "Avto zaryadka",
+  "image": "/media/everest/6.jpg"
+ },
+ {
+  "name": "Kingdka KDK-215 Avto zaryadka 52.5W",
+  "price": 24000,
+  "category": "Avto zaryadka",
+  "image": "/media/everest/7.jpg"
+ },
+ {
+  "name": "MJ-36 RGB Ring Light 14\"",
+  "price": 120000,
+  "category": "Ring Light",
+  "image": "/media/everest/8.jpg"
+ },
+ {
+  "name": "Shtativ (tripod) 2m",
+  "price": 60000,
+  "category": "Shtativ",
+  "image": "/media/everest/9.jpg"
+ },
+ {
+  "name": "Jmary MT-75 Shtativ",
+  "price": 65000,
+  "category": "Shtativ",
+  "image": "/media/everest/10.jpg"
+ },
+ {
+  "name": "Jmary Selfie Shtativ",
+  "price": 100000,
+  "category": "Shtativ",
+  "image": "/media/everest/11.jpg"
+ },
+ {
+  "name": "Jmary FM-14R Ring Light 14\"",
+  "price": 230000,
+  "category": "Ring Light",
+  "image": "/media/everest/12.jpg"
+ },
+ {
+  "name": "Jmary FM-18R Ring Light 18\"",
+  "price": 310000,
+  "category": "Ring Light",
+  "image": "/media/everest/13.jpg"
+ },
+ {
+  "name": "Jmary FM-21R Ring Light 21\"",
+  "price": 360000,
+  "category": "Ring Light",
+  "image": "/media/everest/14.jpg"
+ },
+ {
+  "name": "RECRSI RE-NY059 Naushnik (Bluetooth)",
+  "price": 90000,
+  "category": "Naushnik",
+  "image": "/media/everest/15.jpg"
+ },
+ {
+  "name": "Inkax H35 Max Naushnik",
+  "price": 140000,
+  "category": "Naushnik",
+  "image": "/media/everest/16.jpg"
+ },
+ {
+  "name": "RECRSI RE-NY006 Neckband naushnik",
+  "price": 35000,
+  "category": "Naushnik",
+  "image": "/media/everest/17.jpg"
+ },
+ {
+  "name": "GH L8 Neckband naushnik",
+  "price": 50000,
+  "category": "Naushnik",
+  "image": "/media/everest/18.jpg"
+ },
+ {
+  "name": "GH L7 Neckband naushnik",
+  "price": 50000,
+  "category": "Naushnik",
+  "image": "/media/everest/19.jpg"
+ },
+ {
+  "name": "RECRSI RE-NH02 Neckband 120h",
+  "price": 65000,
+  "category": "Naushnik",
+  "image": "/media/everest/20.jpg"
+ },
+ {
+  "name": "RECRSI RE-NH04 Neckband 200h",
+  "price": 65000,
+  "category": "Naushnik",
+  "image": "/media/everest/21.jpg"
+ },
+ {
+  "name": "RECRSI RE-NY052 Neckband 200h",
+  "price": 65000,
+  "category": "Naushnik",
+  "image": "/media/everest/22.jpg"
+ },
+ {
+  "name": "RECRSI RE-NH12 Neckband 240h",
+  "price": 65000,
+  "category": "Naushnik",
+  "image": "/media/everest/23.jpg"
+ },
+ {
+  "name": "RECRSI RE-NH11 Neckband 240h",
+  "price": 65000,
+  "category": "Naushnik",
+  "image": "/media/everest/24.jpg"
+ },
+ {
+  "name": "25W PD Adapter USB-C",
+  "price": 16000,
+  "category": "Adapter",
+  "image": "/media/everest/25.jpg"
+ },
+ {
+  "name": "45W PD Adapter USB-C",
+  "price": 18000,
+  "category": "Adapter",
+  "image": "/media/everest/26.jpg"
+ },
+ {
+  "name": "45W PD Adapter USB-C (Samsung)",
+  "price": 22000,
+  "category": "Adapter",
+  "image": "/media/everest/27.jpg"
+ },
+ {
+  "name": "67W Fast Charger Adapter",
+  "price": 12000,
+  "category": "Adapter",
+  "image": "/media/everest/28.jpg"
+ },
+ {
+  "name": "25W Adapter + Kabel",
+  "price": 16000,
+  "category": "Adapter",
+  "image": "/media/everest/29.jpg"
+ },
+ {
+  "name": "45W Adapter + Kabel (Kingdka)",
+  "price": 22000,
+  "category": "Adapter",
+  "image": "/media/everest/30.jpg"
+ },
+ {
+  "name": "45W Adapter + Kabel (Samsung)",
+  "price": 26000,
+  "category": "Adapter",
+  "image": "/media/everest/31.jpg"
+ },
+ {
+  "name": "65W PD Adapter (Kingdka)",
+  "price": 28000,
+  "category": "Adapter",
+  "image": "/media/everest/32.jpg"
+ },
+ {
+  "name": "RECRSI 120W Hypercharge",
+  "price": 24000,
+  "category": "Adapter",
+  "image": "/media/everest/33.jpg"
+ },
+ {
+  "name": "Type-C - Lightning kabel",
+  "price": 7000,
+  "category": "Kabel",
+  "image": "/media/everest/34.jpg"
+ },
+ {
+  "name": "Universal rozetka adapter",
+  "price": 5000,
+  "category": "Boshqa",
+  "image": "/media/everest/35.jpg"
+ },
+ {
+  "name": "Type-C - Type-C kabel",
+  "price": 12000,
+  "category": "Kabel",
+  "image": "/media/everest/36.jpg"
+ },
+ {
+  "name": "Type-C - Type-C kabel 1m",
+  "price": 12000,
+  "category": "Kabel",
+  "image": "/media/everest/37.jpg"
+ },
+ {
+  "name": "Type-C - Lightning kabel 1m",
+  "price": 12000,
+  "category": "Kabel",
+  "image": "/media/everest/38.jpg"
+ },
+ {
+  "name": "Type-C kabel 2m (67W)",
+  "price": 15000,
+  "category": "Kabel",
+  "image": "/media/everest/39.jpg"
+ },
+ {
+  "name": "A-S30 Type-C kabel 3m (67W)",
+  "price": 18000,
+  "category": "Kabel",
+  "image": "/media/everest/40.jpg"
+ },
+ {
+  "name": "Samsung 65W Adapter",
+  "price": 28000,
+  "category": "Adapter",
+  "image": "/media/everest/41.jpg"
+ },
+ {
+  "name": "Inkax T02 Airpods",
+  "price": 75000,
+  "category": "Airpods",
+  "image": "/media/everest/42.jpg"
+ },
+ {
+  "name": "RECRSI 22.5W Magnit Powerbank 10000mAh",
+  "price": 175000,
+  "category": "Powerbank",
+  "image": "/media/everest/43.jpg"
+ },
+ {
+  "name": "Powerbank 10000mAh (qora)",
+  "price": 45000,
+  "category": "Powerbank",
+  "image": "/media/everest/44.jpg"
+ },
+ {
+  "name": "Powerbank 10000mAh (oq)",
+  "price": 45000,
+  "category": "Powerbank",
+  "image": "/media/everest/45.jpg"
+ },
+ {
+  "name": "Smart DX08C Powerbank 10000mAh",
+  "price": 55000,
+  "category": "Powerbank",
+  "image": "/media/everest/46.jpg"
+ },
+ {
+  "name": "ANC/ENC Airpods",
+  "price": 60000,
+  "category": "Airpods",
+  "image": "/media/everest/47.jpg"
+ },
+ {
+  "name": "ANC/ENC Airpods (quti)",
+  "price": 55000,
+  "category": "Airpods",
+  "image": "/media/everest/48.jpg"
+ },
+ {
+  "name": "HM19 Avto FM modulyator",
+  "price": 35000,
+  "category": "FM modulyator",
+  "image": "/media/everest/49.jpg"
+ },
+ {
+  "name": "HM146 Avto FM modulyator",
+  "price": 35000,
+  "category": "FM modulyator",
+  "image": "/media/everest/50.jpg"
+ },
+ {
+  "name": "Xiaomi 120W Adapter",
+  "price": 32000,
+  "category": "Adapter",
+  "image": "/media/everest/51.jpg"
+ },
+ {
+  "name": "Xiaomi 67W Adapter",
+  "price": 30000,
+  "category": "Adapter",
+  "image": "/media/everest/52.jpg"
+ },
+ {
+  "name": "Samsung USB-C kabel 1m",
+  "price": 8000,
+  "category": "Kabel",
+  "image": "/media/everest/53.jpg"
+ },
+ {
+  "name": "120W Adapter",
+  "price": 16000,
+  "category": "Adapter",
+  "image": "/media/everest/54.jpg"
+ },
+ {
+  "name": "67W Adapter",
+  "price": 14000,
+  "category": "Adapter",
+  "image": "/media/everest/55.jpg"
+ },
+ {
+  "name": "33W Adapter",
+  "price": 12000,
+  "category": "Adapter",
+  "image": "/media/everest/56.jpg"
+ },
+ {
+  "name": "Infinix 120W Adapter",
+  "price": 20000,
+  "category": "Adapter",
+  "image": "/media/everest/57.jpg"
+ },
+ {
+  "name": "Infinix 90W Adapter",
+  "price": 18000,
+  "category": "Adapter",
+  "image": "/media/everest/58.jpg"
+ },
+ {
+  "name": "Xiaomi Type-C Earphones",
+  "price": 25000,
+  "category": "Airpods",
+  "image": "/media/everest/59.jpg"
+ },
+ {
+  "name": "Apple EarPods USB-C",
+  "price": 25000,
+  "category": "Airpods",
+  "image": "/media/everest/60.jpg"
+ },
+ {
+  "name": "RECRSI EP-IT15 Type-C quloqchin",
+  "price": 25000,
+  "category": "Airpods",
+  "image": "/media/everest/61.jpg"
+ },
+ {
+  "name": "20W Adapter USB-C",
+  "price": 18000,
+  "category": "Adapter",
+  "image": "/media/everest/62.jpg"
+ },
+ {
+  "name": "EarPods Type-C (simli)",
+  "price": 15000,
+  "category": "Airpods",
+  "image": "/media/everest/63.jpg"
+ },
+ {
+  "name": "EarPods Type-C (simli, quti)",
+  "price": 15000,
+  "category": "Airpods",
+  "image": "/media/everest/64.jpg"
+ }
+]
