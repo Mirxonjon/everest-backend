@@ -54,29 +54,34 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
 
     this.bot = new Bot(cfg.bot.token);
 
-    // /start — admin xush kelibsiz + boshqaruv tugmasi. Bir vaqtda chatni
-    // avtomatik do'konga ulaydi (zakazlar shu chatga kelsin).
+    // /start — faqat kassir/admin bo'lsa boshqaruv paneli; aks holda Chat ID
+    // beradi (admin uni dashboard'дан kassir qilib qo'shadi).
     this.bot.command('start', async (ctx) => {
       const chatId = String(ctx.chat.id);
-      const linked = await this.prisma.store.updateMany({
-        where: { telegramChatId: null },
-        data: { telegramChatId: chatId },
-      });
-      this.log.log(`/start chat=${chatId}, ulangan do‘kon: ${linked.count}`);
+      const allowed = await this.isRecipient(chatId);
 
-      const text =
-        'Assalomu alaykum! 👋\n\n' +
-        'Bu — Everest Case KASSA (admin) boti.\n\n' +
-        '🧾 Yangi zakazlar shu yerga matn ko‘rinishida keladi — rasm, tafsilotlar va status tugmalari bilan.\n\n' +
-        '⚙️ Mahsulot qo‘shish va boshqaruv uchun pastdagi tugmani bosing 👇' +
-        (linked.count > 0 ? '\n\n✅ Zakazlar shu chatga ulandi.' : '');
-
-      await ctx.reply(text, {
-        reply_markup: new InlineKeyboard().webApp(
-          '📋 Boshqaruv panel',
-          loadConfig().shopUrl + '/dashboard',
-        ),
-      });
+      if (allowed) {
+        const text =
+          'Assalomu alaykum! 👋\n\n' +
+          'Bu — Everest Case KASSA (admin) boti.\n\n' +
+          '🧾 Yangi zakazlar shu yerga matn ko‘rinishida keladi — rasm, tafsilotlar va status tugmalari bilan.\n\n' +
+          '⚙️ Mahsulot qo‘shish va boshqaruv uchun pastdagi tugmani bosing 👇';
+        await ctx.reply(text, {
+          reply_markup: new InlineKeyboard().webApp(
+            '📋 Boshqaruv panel',
+            loadConfig().shopUrl + '/dashboard',
+          ),
+        });
+      } else {
+        await ctx.reply(
+          'Assalomu alaykum! 👋\n\n' +
+            `Sizning Chat ID: <b>${chatId}</b>\n\n` +
+            'Siz hali kassir emassiz. Bu raqamni do‘kon adminiga bering — u sizni ' +
+            'dashboard’dagi «Kassirlar» bo‘limiga qo‘shadi, shundan so‘ng zakazlar sizga ham keladi.',
+          { parse_mode: 'HTML' },
+        );
+      }
+      this.log.log(`/start chat=${chatId}, ruxsat=${allowed}`);
     });
 
     // /id — chat raqamini qo'lda olish (zaxira yo'l).
@@ -123,16 +128,38 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     void this.bot?.stop();
   }
 
-  /** Yangi buyurtmani do'kon chatiga yuborish. */
+  /** Chat zakaz oluvchimi: .env ADMIN_CHAT_ID yoki dashboard'даги kassir. */
+  private async isRecipient(chatId: string): Promise<boolean> {
+    if (this.defaultChat && chatId === this.defaultChat) return true;
+    const n = await this.prisma.cashier.count({ where: { chatId } });
+    return n > 0;
+  }
+
+  /** Zakaz kimlarga boradi: ADMIN_CHAT_ID ( owner) + barcha kassirlar. */
+  private async recipients(storeId: number): Promise<string[]> {
+    const set = new Set<string>();
+    if (this.defaultChat) set.add(this.defaultChat);
+    const cashiers = await this.prisma.cashier.findMany({
+      where: { storeId },
+      select: { chatId: true },
+    });
+    cashiers.forEach((c) => set.add(c.chatId));
+    return [...set];
+  }
+
+  /** Yangi buyurtmani BARCHA kassirlarga yuborish. */
   async notifyOrder(store: Store, order: OrderWithItems): Promise<void> {
-    const chat = store.telegramChatId || this.defaultChat;
-    if (!this.bot || !chat) {
-      this.log.warn(`Bot sozlanmagan — №${order.number} xabari yuborilmadi`);
+    if (!this.bot) {
+      this.log.warn(`Bot o‘chiq — №${order.number} xabari yuborilmadi`);
+      return;
+    }
+    const chats = await this.recipients(store.id);
+    if (!chats.length) {
+      this.log.warn(`Kassir yo‘q — №${order.number} hech kimga yuborilmadi`);
       return;
     }
 
-    // Avval mahsulot rasmlarini albom qilib tashlaymiz (10 tagacha), keyin
-    // tugmali xabar — shunda boshqaruv tugmalari chatning tagida qoladi.
+    // Rasmlar albomi (10 tagacha) — bir marta tayyorlanadi.
     const media: InputMediaPhoto[] = [];
     const seen = new Set<string>();
     for (const it of order.items) {
@@ -144,19 +171,18 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       if (media.length >= 10) break;
     }
 
-    if (media.length) {
+    const text = this.orderText(store, order);
+    const kb = this.keyboard(order);
+
+    // Har bir kassirга yuboramiz (biriga xato bo'lsa, qolganiga baribir boradi).
+    for (const chat of chats) {
       try {
-        await this.bot.api.sendMediaGroup(chat, media);
+        if (media.length) await this.bot.api.sendMediaGroup(chat, media);
+        await this.bot.api.sendMessage(chat, text, { parse_mode: 'HTML', reply_markup: kb });
       } catch (e) {
-        // Rasm yuborilmasa — zakaz baribir matn bilan boradi
-        this.log.warn(`Rasmlar yuborilmadi: ${(e as Error).message}`);
+        this.log.warn(`№${order.number} -> ${chat} yuborilmadi: ${(e as Error).message}`);
       }
     }
-
-    await this.bot.api.sendMessage(chat, this.orderText(store, order), {
-      parse_mode: 'HTML',
-      reply_markup: this.keyboard(order),
-    });
   }
 
   /**

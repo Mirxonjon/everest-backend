@@ -40,8 +40,23 @@ model Store {
   categories Category[]
   products   Product[]
   orders     Order[]
+  cashiers   Cashier[]
 
   @@map("stores")
+}
+
+/// Kassir — zakazlar tushadigan odam (chat). Admin dashboard'дан boshqariladi.
+model Cashier {
+  id        Int      @id @default(autoincrement())
+  storeId   Int      @map("store_id")
+  chatId    String   @map("chat_id")
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@unique([storeId, chatId])
+  @@map("cashiers")
 }
 
 /// Katalog bo'limi. `id` manbadagi raqamni saqlaydi (0 = «Boshqalar»).

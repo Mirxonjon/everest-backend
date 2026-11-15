@@ -75,4 +75,23 @@ export class AdminController {
   orders() {
     return this.admin.listOrders();
   }
+
+  @Get('cashiers')
+  @UseGuards(AdminGuard)
+  cashiers() {
+    return this.admin.cashiers();
+  }
+
+  @Post('cashiers')
+  @UseGuards(AdminGuard)
+  @HttpCode(200)
+  addCashier(@Body() body: { chat_id?: string; name?: string }) {
+    return this.admin.addCashier(body?.chat_id || '', body?.name);
+  }
+
+  @Delete('cashiers/:id')
+  @UseGuards(AdminGuard)
+  removeCashier(@Param('id', ParseIntPipe) id: number) {
+    return this.admin.deleteCashier(id);
+  }
 }

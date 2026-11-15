@@ -193,4 +193,39 @@ export class AdminService {
     });
     return { data: orders.map(mapOrder) };
   }
+
+  /* ---------- Kassirlar (kim zakaz oladi) ---------- */
+
+  async cashiers() {
+    const store = await this.store();
+    const rows = await this.prisma.cashier.findMany({
+      where: { storeId: store.id },
+      orderBy: { id: 'asc' },
+    });
+    return { data: rows };
+  }
+
+  async addCashier(chatId: string, name?: string) {
+    const store = await this.store();
+    const clean = (chatId || '').trim();
+    if (!/^-?\d+$/.test(clean)) {
+      throw new HttpException({ message: 'Chat ID faqat raqam bo‘lishi kerak' }, 422);
+    }
+    const cashier = await this.prisma.cashier.upsert({
+      where: { storeId_chatId: { storeId: store.id, chatId: clean } },
+      update: { name: (name || '').trim() || null },
+      create: { storeId: store.id, chatId: clean, name: (name || '').trim() || null },
+    });
+    this.log.log(`+ kassir ${clean} (${cashier.name || '—'})`);
+    return { cashier };
+  }
+
+  async deleteCashier(id: number) {
+    const store = await this.store();
+    const existing = await this.prisma.cashier.findFirst({ where: { id, storeId: store.id } });
+    if (!existing) throw new NotFoundException({ message: 'Kassir topilmadi' });
+    await this.prisma.cashier.delete({ where: { id } });
+    this.log.log(`- kassir ${existing.chatId} o‘chirildi`);
+    return { ok: true };
+  }
 }
