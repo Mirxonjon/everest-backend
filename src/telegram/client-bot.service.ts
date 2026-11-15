@@ -27,13 +27,13 @@ export class ClientBotService implements OnModuleInit, OnModuleDestroy {
 
     const welcome =
       'Assalomu alaykum! 👋\n\n' +
-      'Everest Case — telefon aksessuarlari do‘koni 🛍\n' +
-      'Zaryadchi, kabel, quloqchin, powerbank, tutqich va boshqalar — sifatli va arzon.\n\n' +
+      'Everest Case — telefon aksessuarlari do‘koni\n' +
+      'Zaryadchi, kabel, quloqchin, powerbank va boshqalar — sifatli va arzon.\n\n' +
       '🚚 Yetkazib berish bor\n' +
       '📍 O‘rikzor bozori ro‘parasi (tuneldan chiqqanda)\n\n' +
       'Do‘konni ochish uchun 👇';
 
-    const keyboard = () => new InlineKeyboard().webApp('🛍 Do‘konni ochish', shopUrl);
+    const keyboard = () => new InlineKeyboard().webApp('Do‘konni ochish', shopUrl);
 
     this.bot.command('start', (ctx) => ctx.reply(welcome, { reply_markup: keyboard() }));
 

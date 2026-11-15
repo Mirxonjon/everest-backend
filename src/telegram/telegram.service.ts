@@ -54,23 +54,29 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
 
     this.bot = new Bot(cfg.bot.token);
 
-    // /start — chatni avtomatik do'konga ulaydi: hali hech qaysi do'konga
-    // chat biriktirilmagan bo'lsa, shu chat zakazlarni qabul qiladi.
+    // /start — admin xush kelibsiz + boshqaruv tugmasi. Bir vaqtda chatni
+    // avtomatik do'konga ulaydi (zakazlar shu chatga kelsin).
     this.bot.command('start', async (ctx) => {
       const chatId = String(ctx.chat.id);
       const linked = await this.prisma.store.updateMany({
         where: { telegramChatId: null },
         data: { telegramChatId: chatId },
       });
-
       this.log.log(`/start chat=${chatId}, ulangan do‘kon: ${linked.count}`);
 
-      await ctx.reply(
-        linked.count > 0
-          ? `✅ Tayyor! Endi yangi zakazlar shu chatga tushadi.\n\nChat ID: ${chatId}`
-          : `Chat ID: ${chatId}\n\nZakazlar allaqachon ulangan. Qayta ulash uchun ` +
-              `boshqa chatni uzing yoki .env dagi ADMIN_CHAT_ID ni tozalang.`,
-      );
+      const text =
+        'Assalomu alaykum! 👋\n\n' +
+        'Bu — Everest Case KASSA (admin) boti.\n\n' +
+        '🧾 Yangi zakazlar shu yerga matn ko‘rinishida keladi — rasm, tafsilotlar va status tugmalari bilan.\n\n' +
+        '⚙️ Mahsulot qo‘shish va boshqaruv uchun pastdagi tugmani bosing 👇' +
+        (linked.count > 0 ? '\n\n✅ Zakazlar shu chatga ulandi.' : '');
+
+      await ctx.reply(text, {
+        reply_markup: new InlineKeyboard().webApp(
+          '📋 Boshqaruv panel',
+          loadConfig().shopUrl + '/dashboard',
+        ),
+      });
     });
 
     // /id — chat raqamini qo'lda olish (zaxira yo'l).
