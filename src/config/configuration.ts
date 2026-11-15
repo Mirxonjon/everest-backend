@@ -7,6 +7,9 @@ export interface AppConfig {
     token: string | null;
     adminChatId: string | null;
   };
+  // Client (zakaz oluvchi) bot — /start da do'kon tugmasini ko'rsatadi
+  clientBotToken: string | null;
+  shopUrl: string;
   admin: {
     user: string;
     pass: string;
@@ -34,6 +37,8 @@ export function loadConfig(): AppConfig {
       token: (process.env.BOT_TOKEN || '').trim() || null,
       adminChatId: (process.env.ADMIN_CHAT_ID || '').trim() || null,
     },
+    clientBotToken: (process.env.CLIENT_BOT_TOKEN || '').trim() || null,
+    shopUrl: (process.env.SHOP_URL || 'https://everestcase.coachingzona.uz').trim(),
     admin: {
       user: process.env.ADMIN_USER || 'admin',
       pass: process.env.ADMIN_PASS || 'everest2026',
